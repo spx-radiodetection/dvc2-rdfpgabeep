@@ -1,0 +1,46 @@
+An sysfs beeper driver for the Radiodetection DVC2 fpga.
+
+The beeper can have its frequency set, and sound for a given duration.  The 
+resolution of the duration is 10ms, the duration limit is 2.5 seconds.
+
+The beeper will sound, and you cannot interrupt the beeper once it is
+sounding.
+
+The beeper has a sysfs interface
+> ls /sys/bus/i2c/devices/i2c-0/0-002b/
+beep         duration_ms  modalias     name         subsystem
+driver       frequency    muted        power        uevent
+
+Key attributes:
+- muted: if non zero the beep will not sound
+- frequency: frequency in Hz (limit 8192Hz)
+- duration_ms: duration in ms (limit 2500ms)
+- beep: A write to beep will cause the beeper to sound.
+        As a convenience feature, a write of two decimal numbers (a frequency
+        followed by duration in ms) will cause the beeper to sound at the
+        given frequency for the given duration.
+
+
+device tree bindings
+--------------------
+
+Required properties:
+- compatible: "rdfpgabeep"
+- reg: the I2C address
+
+Optional properties:
+- muted: if present the beeper is muted by default
+- frequency: default frequency (default 440Hz)
+- duration_ms: default duration_ms (default 1000)
+
+Example device tree
+
+	joystick_left: rdfpgabeep@2b {
+		compatible = "rdfpgabeep";
+		reg = <0x2b>;
+		frequency = <440>;
+		duration_ms = <1000>;
+		muted;
+		status = "okay";
+	};
+
