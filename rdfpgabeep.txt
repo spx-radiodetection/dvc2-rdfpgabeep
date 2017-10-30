@@ -35,7 +35,7 @@ Optional properties:
 
 Example device tree
 
-	joystick_left: rdfpgabeep@2b {
+	beeper: rdfpgabeep@2b {
 		compatible = "rdfpgabeep";
 		reg = <0x2b>;
 		frequency = <440>;
