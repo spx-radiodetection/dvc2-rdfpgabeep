@@ -1,0 +1,14 @@
+Beeper driver for Radiodetection's DVC2
+=======================================
+
+An sysfs beeper driver for the Radiodetection DVC2 fpga.
+
+The beeper can have its frequency set, and sound for a given duration.  The 
+resolution of the duration is 10ms, the duration limit is 2.5 seconds.
+
+The beeper will sound, and you cannot interrupt the beeper once it is
+sounding.
+
+The beeper has a sysfs interface.
+
+For sysfs interface, and device tree bindings see rdfpgabeep.txt.
